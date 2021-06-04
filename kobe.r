@@ -2,10 +2,10 @@ rm(list=ls())
 library(RColorBrewer)
 library(Cairo)
 
-##--SET WORKING DIRECTORY--###################
+##--SET YOUR WORKING DIRECTORY--###################
 setwd('~/dropbox/working/fisheries_uncertainty/github_public')
-##############################################
 
+##--Load functions--#########################
 source('weight.func.r')
 source('aggregate_function.r')
 
@@ -15,6 +15,7 @@ stocks <- unique(d$stockid)
 yrs <- 1980:2016
 n <- length(yrs)
 
+##--Vector of total catches--#######################
 tc <- rep(NA,length(stocks))
 for(i in 1:length(stocks)){
   d_tmp <- d[d$stockid==stocks[i],]
@@ -22,11 +23,12 @@ for(i in 1:length(stocks)){
   tc[i]     <- mean(TC,na.rm=TRUE)
 }; tc[tc=='NaN']=NA
 
-TOTAL_B        <- aggregate_index(d=d,x='TB',approx_all=FALSE)
-TOTAL_B_APRX   <- aggregate_index(d=d,x='TB',approx_all=TRUE)
-TOTAL_SSB      <- aggregate_index(d=d,x='SSB',approx_all=FALSE)
-TOTAL_SSB_APRX <- aggregate_index(d=d,x='SSB',approx_all=TRUE)
-TOTAL_U        <- aggregate_index(d=d,x='U')
+##--Compute everything--#######################
+TOTAL_B        <- aggregate_index(x='TB',approx_all=FALSE)
+TOTAL_B_APRX   <- aggregate_index(x='TB',approx_all=TRUE)
+TOTAL_SSB      <- aggregate_index(x='SSB',approx_all=FALSE)
+TOTAL_SSB_APRX <- aggregate_index(x='SSB',approx_all=TRUE)
+TOTAL_U        <- aggregate_index(x='U')
 
 BvB         <- read.csv('data/BvBstocks.csv');      bvb         <- BvB[BvB$year%in%yrs,]
 BvBaprx     <- read.csv('data/BvBstocks_aprx.csv'); bvbaprx     <- BvBaprx[BvBaprx$year%in%yrs,]

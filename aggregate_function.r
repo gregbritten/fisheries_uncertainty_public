@@ -1,7 +1,10 @@
-
-aggregate_index <- function(d,x,approx_all){
+# x is the variable for anlaysis (TB, SSB, or U)
+# approx_all is a TRUE/FALSE to determine if we approximate all stocks by 0.5max(B)
+# dataset 'd', stock list 'stocks', total catch vector 'tc' are loaded outside
+aggregate_index <- function(x,approx_all){
 
 matb=matbmsy=matxxmsy <- matrix(NA,nrow=2020,ncol=length(stocks)) 
+
 
 for(i in 1:length(stocks)){
   d_tmp <- d[d$stockid==stocks[i],]
@@ -28,14 +31,15 @@ for(i in 1:length(stocks)){
 		matb[year,i]     <- B
 		matbmsy[year,i]  <- BMSY
 	 }
-  }
-  if(x=='U'){
-    B      <- d_tmp$TB
-    UUMSY  <- d_tmp$UdivUmsypref
-
-    if(sum(!is.na(B))>0 & sum(!is.na(UUMSY))>0){	
-      matxxmsy[year,i] <- UUMSY
-      matb[year,i]     <- B
+  }else{
+    if(x=='U'){
+      B      <- d_tmp$TB
+      UUMSY  <- d_tmp$UdivUmsypref
+  
+      if(sum(!is.na(B))>0 & sum(!is.na(UUMSY))>0){	
+        matxxmsy[year,i] <- UUMSY
+        matb[year,i]     <- B
+      }
     }
   }
 }
@@ -66,11 +70,11 @@ for(i in 1:length(stocks)){
   dd  <- matxxmsy[,i]
   dd  <- dd[!is.na(dd)]
   ddd <- diff(dd)
-  if(length(ddd)>10){
+  if(length(ddd)>=10){
     ddds <- c(ddds,mean(ddd[(length(ddd)-10):length(ddd)]))
   }
 }
-OUT$xxmsy_trends <- ddds ]
+OUT$xxmsy_trends <- ddds
 
 ##############################################################
 ##--Count stocks above and below--############################

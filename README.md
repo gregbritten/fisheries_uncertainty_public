@@ -1,4 +1,4 @@
-# A precautionary note on the recovery of global fish stocks
+# Code repository for Britten et al. *A precautionary note on the recovery of global fish stocks* PNAS 
 
 `kobe.r` makes Figure 1 a-j and stores variables needed for other plots
 
@@ -8,6 +8,10 @@
 
 `proportion_time_series.r` makes Figure 2 e
 
-Kobe plot for SSB [here](https://github.com/gregbritten/fisheries_uncertainty_public/blob/main/kobe_plot_SSB.pdf).
+`fao.r` plots FAO time series of overfished, maximally fished, and underfished stocks
 
-Histrograms for SSB [here](https://github.com/gregbritten/fisheries_uncertainty_public/blob/main/histograms_SSB.pdf).
+Kobe plot for SSB [here](https://github.com/gregbritten/fisheries_uncertainty_public/blob/main/plots/kobe_plot_SSB.pdf).
+
+Histrograms for SSB [here](https://github.com/gregbritten/fisheries_uncertainty_public/blob/main/plots/histograms_SSB.pdf).
+
+FAO time series [here](https://github.com/gregbritten/fisheries_uncertainty_public/blob/main/plots/fao.pdf).
