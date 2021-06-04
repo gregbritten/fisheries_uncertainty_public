@@ -1,14 +1,14 @@
 
-X <- data.frame(TOTAL_B$bbmsy[1,],TOTAL_B_APRX$bbmsy[1,],
-                TOTAL_B$bbmsy_tc[1,],TOTAL_B_APRX$bbmsy_tc[1,],
-                TOTAL_B$bbmsy_med[1,],TOTAL_B_APRX$bbmsy_med[1,],
-                TOTAL_B$bbmsy_w[1,],TOTAL_B_APRX$bbmsy_w[1,],
+X <- data.frame(TOTAL_B$xxmsy[1,],TOTAL_B_APRX$xxmsy[1,],
+                TOTAL_B$xxmsy_tc[1,],TOTAL_B_APRX$xxmsy_tc[1,],
+                TOTAL_B$xxmsy_med[1,],TOTAL_B_APRX$xxmsy_med[1,],
+                TOTAL_B$xxmsy_w[1,],TOTAL_B_APRX$xxmsy_w[1,],
                 bvb$dlm.geomean[1:n],bvbaprx$dlm.geomean[1:n])
 
-Xex <- data.frame(TOTAL_B$uumsy[1,],
-                TOTAL_B$uumsy_tc[1,],
-                TOTAL_B$uumsy_med[1,],
-                TOTAL_B$uumsy_w[1,],
+Xex <- data.frame(TOTAL_U$xxmsy[1,],
+                TOTAL_U$xxmsy_tc[1,],
+                TOTAL_U$xxmsy_med[1,],
+                TOTAL_U$xxmsy_w[1,],
                 uvu$dlm.geomean[1:n])
 
 col <- adjustcolor('black',alpha.f=0.2)
