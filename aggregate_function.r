@@ -1,5 +1,5 @@
 # x is the variable for anlaysis (TB, SSB, or U)
-# approx_all is a TRUE/FALSE to determine if we approximate all stocks by 0.5max(B)
+# approx_all is TRUE/FALSE to determine if we approximate all stocks by 0.5max(B)
 # dataset 'd', stock list 'stocks', total catch vector 'tc' are loaded outside
 aggregate_index <- function(x,approx_all){
 
@@ -14,11 +14,11 @@ for(i in 1:length(stocks)){
   if(x=='TB'){
   	B       <- d_tmp$TB
   	BBMSY   <- d_tmp$TBdivTBmsy
-  }
+  }else{
   if(x=='SSB'){
     B       <- d_tmp$SSB
     BBMSY   <- d_tmp$SSBdivSSBmsy
-  }
+  }}
     
 	if(sum(!is.na(B))>0){ 
 	  if(approx_all==FALSE){

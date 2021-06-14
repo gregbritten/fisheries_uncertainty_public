@@ -1,4 +1,4 @@
-# Code repository for Britten et al. *A precautionary note on the recovery of global fish stocks* PNAS 
+# Code repository for Britten et al. *Recovery of global assessed fish stocks remains uncertain* PNAS 
 
 `kobe.r` makes Figure 1 a-j and stores variables needed for other plots
 

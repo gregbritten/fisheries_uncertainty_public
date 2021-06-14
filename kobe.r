@@ -5,27 +5,27 @@ library(Cairo)
 ##--SET YOUR WORKING DIRECTORY--###################
 setwd('~/dropbox/working/fisheries_uncertainty/github_public')
 
-##--Load functions--#########################
-source('weight.func.r')
+##--FUNCTIONS--####################################
 source('aggregate_function.r')
+source('other_functions.r')
 
+##--DATA--#########################################
 d      <- read.csv('data/RAMLDB v4.491 (assessment data only)_timeseries_values_views.csv',stringsAsFactors=FALSE)
 stocks <- unique(d$stockid)
+yrs    <- 1980:2016
+n      <- length(yrs)
 
-yrs <- 1980:2016
-n <- length(yrs)
-
-##--Vector of total catches--#######################
+##--MEAN TOTAL CATCH WEIGHTS--#######################
 tc <- rep(NA,length(stocks))
 for(i in 1:length(stocks)){
   d_tmp <- d[d$stockid==stocks[i],]
-  TC        <- d_tmp$TCbest
-  tc[i]     <- mean(TC,na.rm=TRUE)
+  TC    <- d_tmp$TCbest
+  tc[i] <- mean(TC,na.rm=TRUE)
 }; tc[tc=='NaN']=NA
 
-##--Compute everything--#######################
-TOTAL_B        <- aggregate_index(x='TB',approx_all=FALSE)
-TOTAL_B_APRX   <- aggregate_index(x='TB',approx_all=TRUE)
+##--AGGREGATIONS--#################################
+TOTAL_B        <- aggregate_index(x='TB', approx_all=FALSE)
+TOTAL_B_APRX   <- aggregate_index(x='TB', approx_all=TRUE)
 TOTAL_SSB      <- aggregate_index(x='SSB',approx_all=FALSE)
 TOTAL_SSB_APRX <- aggregate_index(x='SSB',approx_all=TRUE)
 TOTAL_U        <- aggregate_index(x='U')
@@ -36,36 +36,12 @@ UvU         <- read.csv('data/UvUstocks.csv');      uvu         <- UvU[UvU$year%
 SSBvSSB     <- read.csv('data/SSBvSSB.csv');        ssbvssb     <- SSBvSSB[SSBvSSB$year%in%yrs,]
 SSBvSSBaprx <- read.csv('data/SSBvSSB_aprx.csv');   ssbvssbaprx <- SSBvSSBaprx[SSBvSSBaprx$year%in%yrs,]
 
+###########################################################
+## KOBE PLOTS #############################################
+###########################################################
 alpha  <- 0.7
 lincol <- 'grey'
 
-rects <- function(alpha){
-	rect(xleft=0,xright=1,ybottom=1,ytop=2,col=adjustcolor('red',alpha.f=alpha),border=NA)
-	rect(xleft=1,xright=2,ybottom=1,ytop=2,col=adjustcolor('yellow',alpha.f=alpha),border=NA)
-	rect(xleft=0,xright=1,ybottom=0,ytop=1,col=adjustcolor('yellow',alpha.f=alpha),border=NA)
-	rect(xleft=1,xright=2,ybottom=0,ytop=1,col=adjustcolor('green',alpha.f=alpha),border=NA)
-}
-CIs <- function(muX,sdX,muY,sdY){
-	lines(x=muX-sdX,y=muY-sdY,lty=2)
-	lines(x=muX+sdX,y=muY+sdY,lty=2)
-}
-segs <- function(muX,sdX,muY,sdY){
-	points(muX[1],muY[1],pch=8)
-  segments(x0=muX[n]-2*sdX[n],x1=muX[n]+2*sdX[n],y0=muY[n],         y1=muY[n],lty=1,lwd=2)
-	segments(x0=muX[n],      x1=muX[n],         y0=muY[n]+2*sdY[n],y1=muY[n]-2*sdY[n],lty=1,lwd=2)
-}
-segg <- function(){
-	segments(x0=0,x1=2,y0=1,y1=1,lty=2)
-	segments(x0=1,x1=1,y0=0,y1=2,lty=2)
-}
-labs <- function(){
-	mtext(side=2,line=2.5,expression('U/U'['MSY']))
-	mtext(side=1,line=2.5,expression('B/B'['MSY']))
-}
-
-###################################
-## PLOTS ##########################
-###################################
 par(mfrow=c(2,5),mar=c(2,1,4,1),oma=c(4,4,3,3),xpd=TRUE)
 	plot(TOTAL_U$xxmsy[1,],TOTAL_B$xxmsy[1,],ylim=c(0,2),xlim=c(0,2),cex=0.1,bty='n',type='n',xlab='',ylab='')
 		rects(alpha=alpha); segg()
