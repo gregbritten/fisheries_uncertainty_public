@@ -14,6 +14,6 @@ Kobe plot for SSB [here](https://github.com/gregbritten/fisheries_uncertainty_pu
 
 Histrograms for SSB [here](https://github.com/gregbritten/fisheries_uncertainty_public/blob/main/plots/histograms_SSB.pdf).
 
-Proportion time series with SSB [here](https://github.com/gregbritten/fisheries_uncertainty_public/blob/main/proportion_time_series_1950_with_SSB.pdf)
+Proportion time series with SSB [here](https://github.com/gregbritten/fisheries_uncertainty_public/blob/main/plots/proportion_time_series_1950_with_SSB.pdf)
 
 FAO time series [here](https://github.com/gregbritten/fisheries_uncertainty_public/blob/main/plots/fao.pdf).
